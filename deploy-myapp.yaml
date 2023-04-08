@@ -5,7 +5,7 @@ metadata:
   name: my-service
 spec:
   selector:
-    app: web
+    app: app-python
   ports:
     - name: http
       protocol: TCP
