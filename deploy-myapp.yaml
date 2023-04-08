@@ -17,7 +17,7 @@ spec:
         app: web
     spec:
       containers:
-       — name: app
-          image: edulcorada/app-python:1.0
-          ports:
-           —containerPort: 5000
+      - name: nginx
+        image: edulcorada/app-python:1.0
+        ports:
+        - containerPort: 5000
