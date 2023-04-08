@@ -13,6 +13,21 @@ spec:
       targetPort: 5000
   type: LoadBalancer
 ---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    kubernetes.io/ingress.class: ingress-nginx
+spec:
+  rules:
+  - host: host1.domain.ext
+    http:
+      paths:
+      - backend:
+          serviceName: my-service
+          servicePort: 80
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
