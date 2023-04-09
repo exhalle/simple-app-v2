@@ -1,53 +1,56 @@
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app-container
+          image: edulcorada/app-python:1.0
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_APP
+              value: app.py
+            - name: FLASK_ENV
+              value: production
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
+  name: my-app-service
 spec:
   selector:
-    app: app-python
+    app: my-app
   ports:
     - name: http
       protocol: TCP
       port: 80
       targetPort: 5000
-  type: LoadBalancer
+  type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress
-  annotations:
-    kubernetes.io/ingress.class: ingress-nginx
+  name: my-app-ingress
 spec:
   rules:
-  - host: host1.domain.ext
-    http:
-      paths:
-      - backend:
-          serviceName: my-service
-          servicePort: 80
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: app-python
-  labels:
-    app: web
-spec:
-  selector:
-    matchLabels:
-      app: web
-  replicas: 3
-  strategy:
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: web
-    spec:
-      containers:
-        - name: app-python
-          image: edulcorada/app-python:1.0
-          ports:
-            - containerPort: 5000
+    - host: viperapppython.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-app-service
+                port:
+                  name: http
