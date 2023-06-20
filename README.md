@@ -1,2 +1,8 @@
 # simple-app
-Простое приложение python, запаковано в Docker, и написан deploy для kubernetes.
+Простое приложение python 
+- Flask
+Запаковано в Docker
+Написан deployment для kubernetes
+- deploy 
+- service 
+- ingress
