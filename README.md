@@ -1,12 +1,14 @@
-# simple-app
+# simple-app v2 ( helm chart )
+
+Image: public
 
 Простое приложение python 
 - Flask
-
-Запаковано в Docker
 - Dockerfile
 
-Написан deployment для kubernetes
+
+
+Создан helm chart 
   - deploy 
   - service 
   - ingress
