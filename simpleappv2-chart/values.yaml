@@ -58,7 +58,7 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-  tls: []
+  tls:
   - secretName: tls-secret
     hosts:
        - viperapppython.com
