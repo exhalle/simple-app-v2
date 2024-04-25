@@ -5,7 +5,7 @@
 replicaCount: 3
 
 image:
-  repository: edulcorada/app-python:1.0
+  repository: edulcorada/app-python
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.0"
